@@ -1,5 +1,6 @@
 package com.pjh.restfulwebservice.user;
 
+import com.pjh.restfulwebservice.user.exception.UserNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,11 +24,15 @@ public class UserController {
 
     // GET /user1 or /users/10 -> String
     @GetMapping("/users/{id}")
-    public User retrieveUser(@PathVariable int id){ // String -> id auto converting
-        Optional<User> optional = Optional.ofNullable(service.findOne(id));
-        if(optional.get() == null)
-            return null;
-        return optional.get();
+    public User retrieveUser(@PathVariable int id) throws UserNotFoundException { // String -> id auto converting
+        Optional<User> userOptional = service.findOne(id);
+        User user;
+        try {
+            user = userOptional.get();
+        }catch (Exception e){
+            throw new UserNotFoundException(String.format("[ID %d] not found", id));
+        }
+        return user;
     }
 
     //생성된 user id를 조회하는 API 생성하는 대신

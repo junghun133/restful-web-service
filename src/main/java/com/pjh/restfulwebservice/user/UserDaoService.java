@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDaoService implements DaoService{
@@ -21,11 +22,10 @@ public class UserDaoService implements DaoService{
         return users;
     }
 
-    public User findOne(int id){
+    public Optional<User> findOne(int id){
          return users.stream()
                 .filter( u -> u.getId() == id)
-                .findFirst()
-                .get();
+                .findFirst();
     }
 
     @Override
