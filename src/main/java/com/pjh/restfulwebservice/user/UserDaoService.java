@@ -2,10 +2,8 @@ package com.pjh.restfulwebservice.user;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class UserDaoService implements DaoService{
@@ -35,5 +33,19 @@ public class UserDaoService implements DaoService{
         }
         users.add(user);
         return user;
+    }
+
+    public User deleteById(int id){
+        Iterator<User> iterator = users.iterator();
+
+        while(iterator.hasNext()){
+            User user = iterator.next();
+
+            if(user.getId() == id){
+                iterator.remove();
+                return user;
+            }
+        }
+        return null;
     }
 }
