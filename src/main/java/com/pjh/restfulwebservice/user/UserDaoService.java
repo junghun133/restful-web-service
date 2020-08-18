@@ -11,9 +11,9 @@ public class UserDaoService implements DaoService{
     private static final List<User> users = new ArrayList<>();
     private static int userCount = 3;
     static{
-        users.add(new User(1, "JungHoon, Park", new Date()));
-        users.add(new User(2, "JungSoon, Park", new Date()));
-        users.add(new User(3, "JungBoon, Park", new Date()));
+        users.add(new User(1, "JungHoon, Park", new Date(), "pass1", "921029-1111111"));
+        users.add(new User(2, "JungSoon, Park", new Date(), "pass2", "921029-1111112"));
+        users.add(new User(3, "JungBoon, Park", new Date(),  "pass3", "921029-1111113"));
     }
 
     public List<User> findAll(){
