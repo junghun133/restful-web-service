@@ -3,6 +3,7 @@ package com.pjh.restfulwebservice.user;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 //@JsonIgnoreProperties(value={"password"})
+@NoArgsConstructor
 @JsonFilter("UserInfo")
 public class User {
 
