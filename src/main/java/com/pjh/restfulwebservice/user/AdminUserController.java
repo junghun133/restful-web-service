@@ -13,9 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *  filter 연습
+ */
 @RestController
 @RequestMapping("/admin")
 public class AdminUserController {
+    interface Field{
+        enum name{
+            id, name, joinDate, password, ssn
+        }
+    }
     private UserDaoService service;
 
     public AdminUserController(UserDaoService service) {
@@ -27,7 +35,12 @@ public class AdminUserController {
         List<User> allUsers = service.findAll();
 
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
-                .filterOutAllExcept("id", "name", "joinDate", "password");
+                .filterOutAllExcept(
+                        Field.name.id.name(),
+                        Field.name.password.name(),
+                        Field.name.name.name(),
+                        Field.name.ssn.name()
+                );
         FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo", filter);
 
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(allUsers);
@@ -45,15 +58,17 @@ public class AdminUserController {
         user = userOptional.get();
 
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
-                .filterOutAllExcept("id", "name", "password", "ssn");
+                .filterOutAllExcept(
+                        Field.name.id.name(),
+                        Field.name.password.name(),
+                        Field.name.name.name(),
+                        Field.name.ssn.name()
+                        );
         FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo", filter);
 
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(user);
         mappingJacksonValue.setFilters(filters);
         return mappingJacksonValue;
     }
-
-
-
 }
 

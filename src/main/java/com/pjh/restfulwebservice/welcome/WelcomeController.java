@@ -19,7 +19,7 @@ public class WelcomeController {
         return "Hello, i'm JungHoon-Park :)";
     }
 
-    //RestController annotation을 사용하게 되면
+    //RestController annotation을 사용할때
     //java bean pojo 형태로 return되면 json 형태로 response 된다.
     @GetMapping(path = "/hi-bean")
     public HiBean hiBean(){
