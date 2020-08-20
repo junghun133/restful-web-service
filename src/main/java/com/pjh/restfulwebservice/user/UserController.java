@@ -41,8 +41,8 @@ public class UserController {
         Resource<User> resource = new Resource<>(user);
 //        ControllerLinkBuilder controllerLinkBuilder = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 //        resource.add(controllerLinkBuilder.withRel("all-users"));
-        ControllerLinkBuilder controllerLinkBuilder = linkTo(methodOn(this.getClass()).deleteUser(id));
-        resource.add(controllerLinkBuilder.withRel("del-users"));
+        ControllerLinkBuilder controllerLinkBuilder = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+        resource.add(controllerLinkBuilder.withRel("all-users"));
 
         return resource;
     }
