@@ -1,8 +1,10 @@
-package com.pjh.restfulwebservice.user.jpa;
+package com.pjh.restfulwebservice.user.controller;
 
-import com.pjh.restfulwebservice.user.Post;
-import com.pjh.restfulwebservice.user.User;
+import com.pjh.restfulwebservice.user.entity.Post;
+import com.pjh.restfulwebservice.user.entity.User;
 import com.pjh.restfulwebservice.user.exception.UserNotFoundException;
+import com.pjh.restfulwebservice.user.jpa.PostRepository;
+import com.pjh.restfulwebservice.user.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -22,7 +24,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping("/jpa")
 public class UserJPAController {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @GetMapping("/users")
     public List<User> retrieveUsers(){
@@ -64,5 +69,23 @@ public class UserJPAController {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
 
         return user.get().getPosts();
+    }
+
+    @PostMapping("/users/{id}/posts")
+    public ResponseEntity<Post> createPost(@PathVariable int id, @Valid @RequestBody Post post){
+        Optional<User> user = userRepository.findById(id);
+
+        if(!user.isPresent())
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+
+        post.setUser(user.get());
+        Post savedPost = postRepository.save(post);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPost.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }

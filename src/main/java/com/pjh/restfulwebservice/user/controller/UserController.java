@@ -1,5 +1,7 @@
-package com.pjh.restfulwebservice.user;
+package com.pjh.restfulwebservice.user.controller;
 
+import com.pjh.restfulwebservice.user.entity.User;
+import com.pjh.restfulwebservice.user.service.UserDaoService;
 import com.pjh.restfulwebservice.user.exception.UserNotFoundException;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -33,11 +35,11 @@ public class UserController {
     public Resource<User> retrieveUser(@PathVariable int id) throws UserNotFoundException { // String -> id auto converting
         Optional<User> userOptional = service.findOne(id);
         User user = null;
-        if(userOptional.isEmpty())
+        if(!userOptional.isPresent())
             throw new UserNotFoundException(String.format("[ID %d] not found", id));
 
         user = userOptional.get();
-        //HATEOAS
+        //HATEOA
         Resource<User> resource = new Resource<>(user);
 //        ControllerLinkBuilder controllerLinkBuilder = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 //        resource.add(controllerLinkBuilder.withRel("all-users"));

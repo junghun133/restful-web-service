@@ -1,4 +1,6 @@
-package com.pjh.restfulwebservice.user;
+package com.pjh.restfulwebservice.user.service;
+
+import com.pjh.restfulwebservice.user.entity.User;
 
 import java.util.List;
 import java.util.Optional;

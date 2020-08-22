@@ -1,4 +1,4 @@
-package com.pjh.restfulwebservice.user;
+package com.pjh.restfulwebservice.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

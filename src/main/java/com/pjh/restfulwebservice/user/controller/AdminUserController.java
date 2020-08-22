@@ -1,8 +1,11 @@
-package com.pjh.restfulwebservice.user;
+package com.pjh.restfulwebservice.user.controller;
 
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.pjh.restfulwebservice.user.entity.User;
+import com.pjh.restfulwebservice.user.service.UserDaoService;
+import com.pjh.restfulwebservice.user.entity.UserV2;
 import com.pjh.restfulwebservice.user.exception.UserNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.converter.json.MappingJacksonValue;

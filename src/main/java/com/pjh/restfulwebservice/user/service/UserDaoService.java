@@ -1,5 +1,6 @@
-package com.pjh.restfulwebservice.user;
+package com.pjh.restfulwebservice.user.service;
 
+import com.pjh.restfulwebservice.user.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

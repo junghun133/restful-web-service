@@ -1,4 +1,4 @@
-package com.pjh.restfulwebservice.user;
+package com.pjh.restfulwebservice.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
